@@ -30,10 +30,19 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pnpm install --frozen-lockfile
 
-      - name: Build und Release veröffentlichen
-        run: pnpm run release
+      - name: Windows Installer bauen
+        run: pnpm run build
+
+      - name: Release-Assets hochladen
+        if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" `
+            dist/*.exe `
+            dist/*.blockmap `
+            dist/latest*.yml `
+            --clobber
 
       - name: Build-Artefakte hochladen
         uses: actions/upload-artifact@v4
