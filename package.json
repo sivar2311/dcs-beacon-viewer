@@ -1,6 +1,6 @@
 {
   "name": "dcs-beacon-viewer",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "main.js",
   "repository": {
@@ -29,16 +29,21 @@
       "renderer.js",
       "index.html",
       "styles.css",
-      "package.json"
+      "package.json",
+      "assets/**/*"
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon" : "assets/icon.ico"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
     },
     "publish": {
       "provider": "github"
