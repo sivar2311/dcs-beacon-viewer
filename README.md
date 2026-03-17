@@ -1,6 +1,6 @@
 # 🛰️ DCS Beacon Viewer
 
-Ein moderner Desktop-Viewer für die `beacons.lua`-Dateien aus **DCS World**.  
+Desktop-Viewer für die `beacons.lua`-Dateien aus **DCS World**.  
 Die Anwendung ermöglicht es, Navigationsbeacons übersichtlich darzustellen, zu filtern und die Position auf Google-Maps anzuzeigen.
 
 ---
@@ -42,7 +42,6 @@ Die Anwendung ermöglicht es, Navigationsbeacons übersichtlich darzustellen, zu
 
 ### 🔎 Globale Suche
 - Durchsucht alle sichtbaren Spalten gleichzeitig
-- Schnelle Eingrenzung großer Datensätze
 
 ---
 
@@ -54,8 +53,5 @@ Die Anwendung ermöglicht es, Navigationsbeacons übersichtlich darzustellen, zu
 
 ### 🗺️ Kartenintegration
 - Jede Zeile besitzt einen **„Show“-Button**
-- Öffnet Google Maps in einem neuen Fenster
-- Position wird direkt angezeigt
 
 ---
-
