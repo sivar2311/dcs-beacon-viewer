@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DCS Beacon Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>DCS Beacon Viewer</h1>
+      <p id="summary">Noch keine Datei geladen</p>
+      <p id="currentFile" class="current-file"></p>
+    </div>
+    <div class="actions">
+      <button id="openFileBtn" type="button">Datei öffnen</button>
+      <input id="search" type="text" placeholder="Globale Suche ..." />
+    </div>
+  </header>
+
+  <main>
+    <div class="table-wrap">
+      <table id="beaconsTable">
+        <thead>
+          <tr>
+            <th data-key="display_name">Name</th>
+            <th data-key="type">Typ</th>
+            <th data-key="frequency">Frequenz</th>
+            <th data-key="channel">Channel</th>
+            <th data-key="latitude">Latitude</th>
+            <th data-key="longitude">Longitude</th>
+            <th data-key="direction">Direction</th>
+            <th>Map</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

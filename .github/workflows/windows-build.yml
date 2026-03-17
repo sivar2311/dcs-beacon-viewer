@@ -1,0 +1,56 @@
+name: Build Windows Installer
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: pnpm einrichten
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Abhängigkeiten installieren
+        run: pnpm install --frozen-lockfile
+
+      - name: Build bei normalem Push
+        if: "!startsWith(github.ref, 'refs/tags/v')"
+        run: pnpm run build
+
+      - name: Build und Release bei Tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: pnpm run release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build-Artefakte hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: dcs-beacon-viewer-windows
+          path: |
+            dist/*.exe
+            dist/*.yml
+            dist/*.blockmap
+          if-no-files-found: error
+          retention-days: 30
