@@ -52,6 +52,24 @@ window.addEventListener("DOMContentLoaded", () => {
     return `${mhz.toFixed(3)} MHz`;
   }
 
+  function toDDM(value, isLat) {
+    if (value === null || value === undefined || Number.isNaN(value)) {
+      return "";
+    }
+
+    const abs = Math.abs(value);
+    const degrees = Math.floor(abs);
+    const minutes = (abs - degrees) * 60;
+
+    const direction = isLat
+      ? value >= 0 ? "N" : "S"
+      : value >= 0 ? "E" : "W";
+
+    const degWidth = isLat ? 2 : 3;
+
+    return `${direction} ${String(degrees).padStart(degWidth, "0")}°${minutes.toFixed(3)}'`;
+  }
+
   function mapBeaconForView(row) {
     return {
       display_name: row.display_name ?? "",
@@ -59,9 +77,12 @@ window.addEventListener("DOMContentLoaded", () => {
       frequency: row.frequency ?? null,
       frequency_display: formatFrequency(row.frequency),
       channel: row.channel ?? "",
-      latitude: row.latitude ?? "",
-      longitude: row.longitude ?? "",
-      direction: row.direction ?? ""
+      latitude: toDDM(row.latitude, true),
+      longitude: toDDM(row.longitude, false),
+      direction:
+        row.direction !== null && row.direction !== undefined
+          ? `${((row.direction % 360 + 360) % 360).toFixed(1)}°`
+          : ""
     };
   }
 
@@ -90,7 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const actionTd = document.createElement("td");
       const showBtn = document.createElement("button");
-      showBtn.textContent = "Show";
+      showBtn.textContent = "Karte";
       showBtn.className = "show-map-btn";
       showBtn.disabled = row.latitude === "" || row.longitude === "";
 
