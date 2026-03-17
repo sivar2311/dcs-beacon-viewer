@@ -1,8 +1,12 @@
 {
   "name": "dcs-beacon-viewer",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sivar2311/dcs-beacon-viewer.git"
+  },
   "scripts": {
     "start": "nodemon -e js,html,css -x electron .",
     "build": "electron-builder --win --publish never",

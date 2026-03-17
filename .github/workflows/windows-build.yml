@@ -6,7 +6,7 @@ on:
       - main
       - master
     tags:
-      - "v*"
+      - "*.*.*"
   workflow_dispatch:
 
 permissions:
@@ -35,11 +35,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build bei normalem Push
-        if: "!startsWith(github.ref, 'refs/tags/v')"
+        if: "!startsWith(github.ref, 'refs/tags/')"
         run: pnpm run build
 
       - name: Build und Release bei Tag
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/')
         run: pnpm run release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
